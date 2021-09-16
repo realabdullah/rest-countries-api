@@ -14,7 +14,7 @@ import { ref, onMounted } from 'vue'
 export default {
   setup() {
     const userTheme = ref('light-theme')
-    const mode = ref('Light Mode')
+    const mode = ref('')
 
     const toggleIt = () => {
       const activeTheme = localStorage.getItem("user-theme")
