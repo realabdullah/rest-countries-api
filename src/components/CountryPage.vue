@@ -6,29 +6,29 @@
     </button>
   </router-link>
 -->
-  <div class="countrypage-card">
-    <img src="../assets/logo.png" alt="logo">
+  <div v-for="count in country" class="countrypage-card">
+    <img :src="count.flag" alt="logo">
     <div class="country-details">
-      <h1>{{ country }}</h1>
+      <h1>{{ count.name }}</h1>
       <div class="sub-details">
         <ul class="list-one">
-          <li>Native Name: <span></span></li>
-          <li>Population: {{ country.population }} <span></span></li>
-          <li>Region: <span></span></li>
-          <li>Sub Region: <span></span></li>
-          <li>Capital: <span></span></li>
+          <li>Native Name: <span>{{ count.nativeName }}</span></li>
+          <li>Population: <span>{{ count.population }}</span></li>
+          <li>Region: <span>{{ count.region }}</span></li>
+          <li>Sub Region: <span>{{ count.subregion }}</span></li>
+          <li>Capital: <span>{{ count.capital }}</span></li>
         </ul>
         <ul>
-          <li>Top Level Domain: <span></span></li>
-          <li>Currencies: <span></span></li>
-          <li>Languages: <span></span></li>
+          <li v-for="domain in count.topLevelDomain">Top Level Domain: <span>{{ domain }}</span></li>
+          <li v-for="curr in count.currencies">Currencies: <span>{{ curr.name }}</span></li>
+          <li v-for="lang in count.languages">Languages: <span>{{ lang.name }}</span></li>
         </ul>
       </div>
       <div class="border">
         <p>Border Countries:</p>
-        <button class="border-country">France</button>
-        <button class="border-country">Germany</button>
-        <button class="border-country">Netherlands</button>
+        <div v-for="bord in count.borders">
+        <button class="border-country">{{ bord }}</button>
+        </div>
       </div>
     </div>
   </div>
@@ -41,14 +41,15 @@ import { useRoute } from 'vue-router'
 
 export default {
   setup() {
-    const country = ({})
+    const country = ref({})
     const route = useRoute()
     const countryName = computed(() => route.params.id)
 
     onMounted(async () => {
       try {
-        const response = await axios.get('https://restcountries.eu/rest/v2/name/nigeria');
-        country.value = response.data
+        const url = "https://restcountries.eu/rest/v2/name/nigeria"
+        const abd = await axios.get(url);
+        country.value = abd.data
         console.log(country);
       } catch (error) {
         console.error(error);
@@ -84,6 +85,11 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0 50px;
+}
+
+.countrypage-card img {
+  width: 400px;
+  margin-right: 30px;
 }
 
 .country-details {
@@ -132,5 +138,9 @@ export default {
   margin: 0 7px;
   border-radius: 5px;
   color: var(--fontColor);
+}
+
+span {
+  font-size: 13px;
 }
 </style>
