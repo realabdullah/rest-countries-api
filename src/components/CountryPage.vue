@@ -43,12 +43,14 @@ export default {
   setup() {
     const country = ref({})
     const route = useRoute()
-    const countryName = computed(() => route.params.id)
+    const countryName = computed(() => route.params.name)
 
     onMounted(async () => {
       try {
-        const url = "https://restcountries.eu/rest/v2/name/nigeria"
-        const abd = await axios.get(url);
+        const url = "https://restcountries.eu/rest/v2/name/"
+        const finalUrl = url + countryName.value
+        console.log(finalUrl)
+        const abd = await axios.get(finalUrl);
         country.value = abd.data
         console.log(country);
       } catch (error) {
@@ -142,5 +144,41 @@ export default {
 
 span {
   font-size: 13px;
+}
+
+@media(max-width:700px) {
+  .countrypage-card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 50px;
+  }
+
+  .country-details {
+    padding: 30px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .sub-details {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
+  }
+
+  .list-one {
+    margin-right: 0px;
+  }
+
+  .border {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .border-country {
+    margin-top: 10px;
+  }
 }
 </style>
