@@ -1,5 +1,5 @@
 <template>
-  <div class="home" :class="{ 'switch': userTheme === 'dark-theme' }">
+  <div class="home" :class="{ 'switch-toggle-checked': userTheme === 'dark-theme' }">
     <Navbar />
     <CountryCard />
   </div>

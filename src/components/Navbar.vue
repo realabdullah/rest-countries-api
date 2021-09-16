@@ -23,7 +23,7 @@ export default {
         mode.value = 'Dark Mode'
       } else {
         setTheme("light-theme")
-        mode.value = 'Dark Mode'
+        mode.value = 'Light Mode'
       }
     }
 
@@ -38,8 +38,10 @@ export default {
         "(prefers-color-scheme: dark)"
       ).matches
       if (hasDarkPreference) {
+        mode.value = 'Dark Mode'
         return "dark-theme"
       } else {
+        mode.value = 'Light Mode'
         return "light-theme"
       }
     }
@@ -95,11 +97,8 @@ export default {
   }
 
   .nav {
-    display: flex;
-    align-items: center;
     justify-content: space-between;
     padding: 20px 25px;
-    background: hsl(209, 23%, 22%);
   }
 }
 </style>
