@@ -1,44 +1,32 @@
 <template>
-  <button @click="getCountries">Get Country</button>
   <div class="country-cards">
-    <div class="country-card" v-for="country in countries">
-      <img :src="country.flag" alt="logo">
-      <div class="details">
-        <h3>{{country.name}}</h3>
-        <p>Population: {{country.population}}</p>
-        <p>Region: {{country.region}}</p>
-        <p>Capital: {{country.capital}}</p>
+      <div class="country-card" v-for="country in countries">
+        <router-link :to="{ name: 'Country', params: { name: country.name }}">
+          <img :src="country.flag" alt="logo">
+          <div class="details">
+            <h4>{{country.name}}</h4>
+            <p>Population: <span>{{country.population}}</span></p>
+            <p>Region: <span>{{country.region}}</span></p>
+            <p>Capital: <span>{{country.capital}}</span></p>
+          </div>
+        </router-link>
       </div>
-    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import { ref } from 'vue'
+import { onMounted } from 'vue'
+import usegetCountries from '../composables/getCountries'
 
 export default {
   setup() {
-    const countries = ref({})
-    const flag = ref('')
-    const name = ref('')
-    const population = ref('')
-    const region = ref('')
-    const capital = ref('')
+    const { getCountries, countries } = usegetCountries()
 
-    const getCountries = async () => {
-      try {
-        const response = await axios.get('https://restcountries.eu/rest/v2/all');
-        countries.value = response.data
-        name.value = countries.name
-        console.log(countries);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+    onMounted(async () => {
+      await getCountries()
+    })
 
     return {
-      getCountries,
       countries
     }
   }
@@ -49,22 +37,41 @@ export default {
 .country-cards {
   display: flex;
   flex-wrap: wrap;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
 }
 
 .country-card {
-  margin: 20px;
-  width: 400px;
-  flex: 1;
+  margin: 30px;
+  width: 300px;
   background: var(--elementBg);
 }
 
-.country-card img {
-  width: -webkit-fill-available;
+.country-card a {
+  text-decoration: none;
+}
+
+.country-card a img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .details {
   padding: 15px;
+}
+
+.details h4 {
+  padding: 10px 0;
+  color: var(--fontColor);
+}
+
+.details p {
+  padding: 5px 0;
+  color: var(--fontColor);
+}
+
+.details p span {
+  font-size: 13px;
+  color: var(--fontColor);
 }
 </style>
