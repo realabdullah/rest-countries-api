@@ -8,7 +8,7 @@
     </router-link>
 
     <div v-for="count in country" class="countrypage-card">
-      <img :src="count.flag" alt="logo">
+      <img :src="count.flag" :alt="count.name">
       <div class="country-details">
         <h1>{{ count.name }}</h1>
         <div class="sub-details">
