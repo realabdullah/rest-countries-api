@@ -45,6 +45,7 @@ export default {
   margin: 30px;
   width: 300px;
   background: var(--elementBg);
+  border-radius: 5px;
 }
 
 .country-card a {
@@ -54,6 +55,8 @@ export default {
 .country-card a img {
   max-width: 100%;
   max-height: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .details {

@@ -1,11 +1,11 @@
 <template>
- <!-- <router-link to="/">
+  <router-link to="/">
     <button class="back">
       <ion-icon name="arrow-back-sharp"></ion-icon>
       <p>Back</p>
     </button>
   </router-link>
--->
+
   <div v-for="count in country" class="countrypage-card">
     <img :src="count.flag" alt="logo">
     <div class="country-details">
@@ -21,13 +21,15 @@
         <ul>
           <li v-for="domain in count.topLevelDomain">Top Level Domain: <span>{{ domain }}</span></li>
           <li v-for="curr in count.currencies">Currencies: <span>{{ curr.name }}</span></li>
-          <li v-for="lang in count.languages">Languages: <span>{{ lang.name }}</span></li>
+          <li>Languages: <span v-for="lang in count.languages"> {{ lang.name }} </span></li>
         </ul>
       </div>
       <div class="border">
         <p>Border Countries:</p>
-        <div v-for="bord in count.borders">
-        <button class="border-country">{{ bord }}</button>
+        <div class="border-button">
+          <div v-for="bord in count.borders">
+            <button class="border-country">{{ bord }}</button>
+          </div>
         </div>
       </div>
     </div>
@@ -75,7 +77,7 @@ export default {
   padding: 10px 20px;
   border-radius: 5px;
   color: var(--fontColor);
-  margin: 50px;
+  margin: 0px;
 }
 
 .back p {
@@ -91,6 +93,7 @@ export default {
 
 .countrypage-card img {
   width: 400px;
+  max-width: 100%;
   margin-right: 30px;
 }
 
@@ -133,37 +136,52 @@ export default {
   margin-right: 10px;
 }
 
+.border-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .border-country {
   border: none;
   background: var(--elementBg);
   padding: 10px 20px;
-  margin: 0 7px;
+  margin: 7px;
   border-radius: 5px;
-  color: var(--fontColor);
+  color: var(--fontColor2);
 }
 
 span {
   font-size: 13px;
+  color: var(--fontColor2);
 }
 
 @media(max-width:700px) {
+  .back {
+    margin: 25px;
+  }
   .countrypage-card {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 50px;
+    padding: 25px;
+    padding-top: 0;
   }
 
   .country-details {
-    padding: 30px;
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
   }
 
+  .countrypage-card img {
+    margin-right: 0;
+  }
+
   .sub-details {
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
     justify-content: center;
     padding-bottom: 40px;
   }
@@ -174,7 +192,7 @@ span {
 
   .border {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .border-country {

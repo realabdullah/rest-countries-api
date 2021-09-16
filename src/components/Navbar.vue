@@ -32,4 +32,22 @@ export default {
 .dark-nav p {
   margin-left: 7px;
 }
+
+@media(max-width:700px) {
+  h2 {
+    font-size: 0.8em;
+  }
+
+  .dark-nav ion-card, .dark-nav p {
+    font-size: 0.8em;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 25px;
+    background: hsl(209, 23%, 22%);
+  }
+}
 </style>

@@ -63,4 +63,18 @@ select {
   padding: 10px;
   background: var(--bg);
 }
+
+@media(max-width: 700px) {
+  .sf {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 40px 25px;
+    padding-bottom: 25px;
+  }
+
+  .search {
+    margin-bottom: 25px;
+  }
+}
 </style>

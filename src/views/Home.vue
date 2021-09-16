@@ -25,6 +25,7 @@ export default {
 :root {
   --bg: hsl(207, 26%, 17%);
   --fontColor: hsl(0, 0%, 100%);
+  --fontColor2: hsl(0, 0%, 52%);
   --elementBg: hsl(209, 23%, 22%);
 }
 
