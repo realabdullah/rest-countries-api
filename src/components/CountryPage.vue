@@ -53,12 +53,10 @@ export default {
       try {
         const url = "https://restcountries.eu/rest/v2/name/"
         const finalUrl = url + countryName.value
-        console.log(finalUrl)
         const abd = await axios.get(finalUrl);
         country.value = abd.data
-        console.log(country);
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
     })
 

@@ -2,7 +2,7 @@
   <div class="sf">
     <div class="search">
       <ion-icon name="search"></ion-icon>
-      <input type="text" v-model="search" placeholder="Search for a country...">
+      <input type="text" v-model="newCountry" @keyup.enter="searchedCountry" placeholder="Search for a country...">
     </div>
     <div class="filter">
       <select v-model="newRegion" @change="changeRegion" name="cars" id="cars">
@@ -23,19 +23,26 @@ import usegetCountries from '../composables/getCountries'
 
 export default {
   setup() {
-    const { getCountries, countries, region } = usegetCountries()
+    const { getCountries, searchCountry, region } = usegetCountries()
     const newRegion = ref('')
+    const newCountry = ref('')
     const search = ref('')
 
     const changeRegion = async () => {
       region.value = newRegion.value
       await getCountries()
-      console.log(region.value)
+    }
+
+    const searchedCountry = async () => {
+      searchCountry.value = newCountry.value
+      await getCountries()
     }
 
     return {
       search,
       newRegion,
+      newCountry,
+      searchedCountry,
       changeRegion
     }
   }

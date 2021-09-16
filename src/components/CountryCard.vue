@@ -12,6 +12,17 @@
           </div>
         </router-link>
       </div>
+      <div class="country-card" v-for="country in countries">
+        <router-link :to="{ name: 'Country', params: { name: country.name }}">
+          <img :src="country.flag" alt="logo">
+          <div class="details">
+            <h3>{{country.name}}</h3>
+            <p>Population: <span>{{country.population}}</span></p>
+            <p>Region: <span>{{country.region}}</span></p>
+            <p>Capital: <span>{{country.capital}}</span></p>
+          </div>
+        </router-link>
+      </div>
   </div>
 </template>
 
