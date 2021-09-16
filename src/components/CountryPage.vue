@@ -95,7 +95,7 @@ a {
 .countrypage-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 0 50px;
 }
 
