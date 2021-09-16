@@ -70,6 +70,10 @@ export default {
 </script>
 
 <style>
+a {
+  text-decoration: none;
+}
+
 .page-bg {
   background: var(--bg);
 }
@@ -83,7 +87,7 @@ export default {
   padding: 10px 20px;
   border-radius: 5px;
   color: var(--fontColor);
-  margin: 25px;
+  margin: 25px 50px;
 }
 
 .back p {
