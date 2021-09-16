@@ -2,13 +2,13 @@
   <div class="sf">
     <div class="search">
       <ion-icon name="search"></ion-icon>
-      <input type="text" placeholder="Search for a country...">
+      <input type="text" v-model="search" placeholder="Search for a country...">
     </div>
     <div class="filter">
-      <select name="cars" id="cars">
+      <select v-model="newRegion" @click="changeRegion" name="cars" id="cars">
         <option class="options" value="">Filter by Region</option>
         <option class="options" value="africa">Africa</option>
-        <option class="options" value="america">America</option>
+        <option class="options" value="americas">America</option>
         <option class="options" value="asia">Asia</option>
         <option class="options" value="europe">Europe</option>
         <option class="options" value="oceania">Oceania</option>
@@ -16,6 +16,31 @@
     </div>
   </div>
 </template>
+
+<script>
+import { ref } from 'vue'
+import usegetCountries from '../composables/getCountries'
+
+export default {
+  setup() {
+    const { getCountries, countries, region } = usegetCountries()
+    const newRegion = ref('')
+    const search = ref('')
+
+    const changeRegion = async () => {
+      region.value = newRegion.value
+      await getCountries()
+      console.log(region.value)
+    }
+
+    return {
+      search,
+      newRegion,
+      changeRegion
+    }
+  }
+}
+</script>
 
 <style>
 .sf {
@@ -42,6 +67,10 @@
 }
 
 .search input::placeholder {
+  color: var(--fontColor);
+}
+
+.search input:focus {
   color: var(--fontColor);
 }
 
@@ -74,7 +103,10 @@ select {
   }
 
   .search {
+    justify-content: flex-start;
     margin-bottom: 25px;
+    padding: 20px;
+    width: 100%;
   }
 }
 </style>

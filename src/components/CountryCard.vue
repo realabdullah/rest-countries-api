@@ -1,10 +1,11 @@
 <template>
+  <Search />
   <div class="country-cards">
       <div class="country-card" v-for="country in countries">
         <router-link :to="{ name: 'Country', params: { name: country.name }}">
           <img :src="country.flag" alt="logo">
           <div class="details">
-            <h4>{{country.name}}</h4>
+            <h3>{{country.name}}</h3>
             <p>Population: <span>{{country.population}}</span></p>
             <p>Region: <span>{{country.region}}</span></p>
             <p>Capital: <span>{{country.capital}}</span></p>
@@ -15,19 +16,24 @@
 </template>
 
 <script>
-import { onMounted } from 'vue'
+import Search from '../components/Search.vue'
+import { onBeforeMount } from 'vue'
 import usegetCountries from '../composables/getCountries'
 
 export default {
+  components: {
+    Search,
+  },
+
   setup() {
     const { getCountries, countries } = usegetCountries()
 
-    onMounted(async () => {
+    onBeforeMount(async () => {
       await getCountries()
     })
 
     return {
-      countries
+      countries,
     }
   }
 }
@@ -63,7 +69,7 @@ export default {
   padding: 15px;
 }
 
-.details h4 {
+.details h3 {
   padding: 10px 0;
   color: var(--fontColor);
 }
