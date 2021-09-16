@@ -1,34 +1,36 @@
 <template>
-  <router-link to="/">
-    <button class="back">
-      <ion-icon name="arrow-back-sharp"></ion-icon>
-      <p>Back</p>
-    </button>
-  </router-link>
+  <div class="page-bg" :class="darkMode ? 'dark-mode' : 'light-mode'">
+    <router-link to="/">
+      <button class="back">
+        <ion-icon name="arrow-back-sharp"></ion-icon>
+        <p>Back</p>
+      </button>
+    </router-link>
 
-  <div v-for="count in country" class="countrypage-card">
-    <img :src="count.flag" alt="logo">
-    <div class="country-details">
-      <h1>{{ count.name }}</h1>
-      <div class="sub-details">
-        <ul class="list-one">
-          <li>Native Name: <span>{{ count.nativeName }}</span></li>
-          <li>Population: <span>{{ count.population }}</span></li>
-          <li>Region: <span>{{ count.region }}</span></li>
-          <li>Sub Region: <span>{{ count.subregion }}</span></li>
-          <li>Capital: <span>{{ count.capital }}</span></li>
-        </ul>
-        <ul>
-          <li v-for="domain in count.topLevelDomain">Top Level Domain: <span>{{ domain }}</span></li>
-          <li v-for="curr in count.currencies">Currencies: <span>{{ curr.name }}</span></li>
-          <li>Languages: <span v-for="lang in count.languages"> {{ lang.name }} </span></li>
-        </ul>
-      </div>
-      <div class="border">
-        <p>Border Countries:</p>
-        <div class="border-button">
-          <div v-for="bord in count.borders">
-            <button class="border-country">{{ bord }}</button>
+    <div v-for="count in country" class="countrypage-card">
+      <img :src="count.flag" alt="logo">
+      <div class="country-details">
+        <h1>{{ count.name }}</h1>
+        <div class="sub-details">
+          <ul class="list-one">
+            <li>Native Name: <span>{{ count.nativeName }}</span></li>
+            <li>Population: <span>{{ count.population }}</span></li>
+            <li>Region: <span>{{ count.region }}</span></li>
+            <li>Sub Region: <span>{{ count.subregion }}</span></li>
+            <li>Capital: <span>{{ count.capital }}</span></li>
+          </ul>
+          <ul>
+            <li v-for="domain in count.topLevelDomain">Top Level Domain: <span>{{ domain }}</span></li>
+            <li v-for="curr in count.currencies">Currencies: <span>{{ curr.name }}</span></li>
+            <li>Languages: <span v-for="lang in count.languages"> {{ lang.name }} </span></li>
+          </ul>
+        </div>
+        <div class="border">
+          <p>Border Countries:</p>
+          <div class="border-button">
+            <div v-for="bord in count.borders">
+              <button class="border-country">{{ bord }}</button>
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +70,10 @@ export default {
 </script>
 
 <style>
+.page-bg {
+  background: var(--bg);
+}
+
 .back {
   display: flex;
   align-items: center;
@@ -77,7 +83,7 @@ export default {
   padding: 10px 20px;
   border-radius: 5px;
   color: var(--fontColor);
-  margin: 0px;
+  margin: 25px;
 }
 
 .back p {

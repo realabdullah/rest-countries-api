@@ -45,6 +45,7 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  background: var(--bg);
 }
 
 .country-card {

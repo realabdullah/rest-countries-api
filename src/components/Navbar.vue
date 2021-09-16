@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <h2>Where in the world?</h2>
-    <div class="dark-nav">
+    <div @click="toggleTheme" class="dark-nav">
       <ion-icon name="moon"></ion-icon>
       <p>Dark Mode</p>
     </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-
+  props: ['toggleTheme']
 }
 </script>
 
@@ -20,13 +20,21 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 20px 50px;
-  background: hsl(209, 23%, 22%);
+  background: var(--elementBg);
+}
+
+.nav h2 {
+  color: var(--fontColor);
 }
 
 .dark-nav {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.dark-nav p, .dark-nav ion-icon {
+  color: var(--fontColor);
 }
 
 .dark-nav p {

@@ -5,7 +5,7 @@
       <input type="text" v-model="search" placeholder="Search for a country...">
     </div>
     <div class="filter">
-      <select v-model="newRegion" @click="changeRegion" name="cars" id="cars">
+      <select v-model="newRegion" @change="changeRegion" name="cars" id="cars">
         <option class="options" value="">Filter by Region</option>
         <option class="options" value="africa">Africa</option>
         <option class="options" value="americas">America</option>
@@ -48,6 +48,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 40px 50px;
+  background: var(--bg);
 }
 
 .search {
@@ -57,6 +58,10 @@ export default {
   background: var(--elementBg);
   padding: 10px;
   border-radius: 5px;
+}
+
+.search ion-icon {
+  color: var(--fontColor);
 }
 
 .search input {
@@ -76,6 +81,7 @@ export default {
 
 .filter {
   background: var(--elementBg);
+  color: var(--fontColor);
   padding: 10px 20px;
   border-radius: 5px;
 }
