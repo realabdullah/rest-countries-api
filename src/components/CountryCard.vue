@@ -1,6 +1,6 @@
 <template>
   <Search />
-  <div class="country-cards">
+  <div class="country-cards" v-if="countries">
     <div class="country-card" v-for="country in countries">
       <router-link :to="{ name: 'Country', params: { name: country.name }}">
         <img :src="country.flag" alt="logo">
@@ -12,6 +12,9 @@
         </div>
       </router-link>
     </div>
+  </div>
+  <div class="no-data">
+    <h1>API used has been deprecated!</h1>
   </div>
 </template>
 
@@ -83,5 +86,12 @@ export default {
 .details p span {
   font-size: 13px;
   color: var(--fontColor);
+}
+
+.no-data {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
