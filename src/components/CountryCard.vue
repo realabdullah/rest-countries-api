@@ -90,6 +90,7 @@ export default {
 
 .no-data {
   margin-top: 50px;
+  padding: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
