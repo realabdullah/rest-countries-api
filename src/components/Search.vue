@@ -23,7 +23,7 @@ import usegetCountries from '../composables/getCountries'
 
 export default {
   setup() {
-    const { getCountries, searchCountry, region } = usegetCountries()
+    const { getCountries, searchCountry, searchCountryName, region } = usegetCountries()
     const newRegion = ref('')
     const newCountry = ref('')
     const search = ref('')
@@ -35,7 +35,7 @@ export default {
 
     const searchedCountry = async () => {
       searchCountry.value = newCountry.value
-      await getCountries()
+      await searchCountryName()
     }
 
     return {

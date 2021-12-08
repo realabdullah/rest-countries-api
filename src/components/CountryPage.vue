@@ -7,17 +7,21 @@
       </button>
     </router-link>
 
-    <div v-for="count in country" class="countrypage-card">
-      <img :src="count.flag" :alt="count.name">
+    <div class="loading" v-if="loading">
+      <img src="../assets/loading.gif" alt="loading">
+    </div>
+
+    <div v-for="count in country" class="countrypage-card" v-else>
+      <img :src="count.flags.png" :alt="count.name.common">
       <div class="country-details">
-        <h1>{{ count.name }}</h1>
+        <h1>{{ count.name.common }}</h1>
         <div class="sub-details">
           <ul class="list-one">
             <li>Native Name: <span>{{ count.nativeName }}</span></li>
             <li>Population: <span>{{ count.population }}</span></li>
             <li>Region: <span>{{ count.region }}</span></li>
             <li>Sub Region: <span>{{ count.subregion }}</span></li>
-            <li>Capital: <span>{{ count.capital }}</span></li>
+            <li>Capital: <span v-for="capt in count.capital">{{ capt }}</span></li>
           </ul>
           <ul>
             <li v-for="domain in count.topLevelDomain">Top Level Domain: <span>{{ domain }}</span></li>
@@ -48,20 +52,24 @@ export default {
     const country = ref({})
     const route = useRoute()
     const countryName = computed(() => route.params.name)
+    const loading = ref(false)
 
     onMounted(async () => {
       try {
-        const url = "https://restcountries.eu/rest/v2/name/"
+        loading.value = true
+        const url = "https://restcountries.com/v3.1/name/"
         const finalUrl = url + countryName.value
         const abd = await axios.get(finalUrl);
         country.value = abd.data
+        loading.value = false
       } catch (error) {
-        console.error(error)
+        // console.error(error)
       }
     })
 
     return {
-      country
+      country,
+      loading
     }
   }
 }

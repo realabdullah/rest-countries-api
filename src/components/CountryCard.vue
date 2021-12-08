@@ -1,20 +1,22 @@
 <template>
   <Search />
-  <div class="country-cards" v-if="countries">
-    <div class="country-card" v-for="country in countries">
-      <router-link :to="{ name: 'Country', params: { name: country.name }}">
-        <img :src="country.flag" alt="logo">
-        <div class="details">
-          <h3>{{country.name}}</h3>
-          <p>Population: <span>{{country.population}}</span></p>
-          <p>Region: <span>{{country.region}}</span></p>
-          <p>Capital: <span>{{country.capital}}</span></p>
-        </div>
-      </router-link>
-    </div>
+  <div class="loading" v-if="loading">
+    <img src="../assets/loading.gif" alt="loading">
   </div>
-  <div class="no-data">
-    <h1>API used has been deprecated!</h1>
+  <div v-else>
+    <div class="country-cards" v-if="countries">
+      <div class="country-card" v-for="country in countries">
+        <router-link :to="{ name: 'Country', params: { name: country.name.common }}">
+          <img :src="country.flags.png" alt="logo">
+          <div class="details">
+            <h3>{{country.name.common}}</h3>
+            <p>Population: <span>{{country.population}}</span></p>
+            <p>Region: <span>{{country.region}}</span></p>
+            <p>Capital: <span v-for="capt in country.capital">{{capt}}</span></p>
+          </div>
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +31,7 @@ export default {
   },
 
   setup() {
-    const { getCountries, countries } = usegetCountries()
+    const { getCountries, countries, loading } = usegetCountries()
 
     onBeforeMount(async () => {
       await getCountries()
@@ -37,12 +39,21 @@ export default {
 
     return {
       countries,
+      loading
     }
   }
 }
 </script>
 
 <style>
+.loading {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: beige;
+}
+
 .country-cards {
   display: flex;
   flex-wrap: wrap;
@@ -86,13 +97,5 @@ export default {
 .details p span {
   font-size: 13px;
   color: var(--fontColor);
-}
-
-.no-data {
-  margin-top: 50px;
-  padding: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 </style>
